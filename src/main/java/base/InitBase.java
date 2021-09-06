@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class InitBase {
 	
@@ -29,18 +31,42 @@ public class InitBase {
 		}
 	}
 	
+	public void setChromePreference() {
+		String currentDir = System.getProperty("user.dir");
+		String expected_dir = currentDir+"\\src\\test\\resources\\download";
+		String driver_path = currentDir+"\\src\\main\\resources\\Drivers\\chromedriver.exe";
+		
+		File file = new File(expected_dir);
+		if(file.exists()) {
+			//deleteAllFiles(file);
+		}
+		
+		ChromeOptions options = new ChromeOptions();
+		
+		HashMap<String,Object> chromePref = new HashMap<>();
+		chromePref.put("download.default_directory", expected_dir);
+		chromePref.put("download.prompt_for_download", "true");
+		chromePref.put("profile.default_content_settings.popups", 0);
+		chromePref.put("safebrowsing.enabled", "false");
+		
+		options.setExperimentalOption("prefs", chromePref);
+	    System.setProperty("webdriver.chrome.driver", driver_path);
+	    driver = new ChromeDriver(options);
+		
+	}
+	
+	public static void deleteAllFiles(File file) {
+		for(File subfile : file.listFiles()) {
+			if(subfile.isDirectory()) {
+				deleteAllFiles(subfile);
+			}
+			subfile.delete();
+		}
+	}
+	
 	public static void openBrowser(String url)
 	{
-		String browserName = prop.getProperty("browserName");
-		if(browserName.equals("chrome"))
-		{
-			System.setProperty("webdriver.chrome.driver", "C:\\APURBA\\ApurvQA\\chromedriver_win32\\chromedriver.exe");
-			driver = new ChromeDriver();
-		}
-		if(url.equals("SignOn"))
-			driver.get(prop.getProperty("SignOnurl"));
-		else if(url.equals("Register"))
-			driver.get(prop.getProperty("RegistrationUrl"));
+		driver.get(url);
 	}
 	
 	public void deleteAllCookies()

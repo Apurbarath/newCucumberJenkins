@@ -12,7 +12,7 @@ import cucumber.api.junit.Cucumber;
 				glue = {"stepDefinations"},
 				dryRun=false ,
 				monochrome=true,
-				tags = {"@simple"})
+				tags = {"@apurba"})
 
 public class MyRunner {
 
