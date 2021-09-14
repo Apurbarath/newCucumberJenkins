@@ -18,17 +18,27 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-				<includes>
-					<exclude>**/*Runner.java</exclude>
-				</includes>
-				</configuration>
-				<version>3.0.0-M3</version>
+				<version>3.0.0-M5</version>
+				
 				</plugin>
 				<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-source-plugin</artifactId>
-		<version>3.0.1</version>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.0.1</version>
+			</plugin>
+			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-failsafe-plugin</artifactId>
+  				<version>3.0.0-M3</version>
+  				<configuration>
+  				<includes>
+					<include>**/*Runner.java</include>
+				</includes>
+  					<parallel>methods</parallel>
+  					<threadCount>3</threadCount>
+  					<perCoreThreadCount>true</perCoreThreadCount>
+  				</configuration>
+  				
 			</plugin>
 			</plugins>
 		</build>
@@ -37,14 +47,9 @@
   <dependency>				
             <groupId>org.seleniumhq.selenium</groupId>						
             <artifactId>selenium-java</artifactId>							
-            <version>2.45.0</version>								
+            <version>3.141.59</version>								
          </dependency>				
-        <dependency>				
-            <groupId>org.testng</groupId>								
-            <artifactId>testng</artifactId>								
-            <version>6.14.3</version>								
-            <scope>test</scope>							  		
-       </dependency>
+      
        
 	       <dependency>
 	    <groupId>org.apache.poi</groupId>
@@ -60,7 +65,7 @@
 		
 		
 <dependency>
-    <groupId>info.cukes</groupId>
+    <groupId>io.cucumber</groupId>
     <artifactId>cucumber-java</artifactId>
     <version>1.2.6</version>
     <scope>test</scope>
@@ -80,6 +85,21 @@
     <type>pom</type>
     <scope>test</scope>
 </dependency>
+
+   <dependency>				
+            <groupId>org.testng</groupId>								
+            <artifactId>testng</artifactId>								
+            <version>6.14.3</version>								
+            <scope>test</scope>							  		
+       </dependency>  
+
+<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-testng</artifactId>
+    <version>6.11.0</version>
+</dependency>
+
 
 		
 </dependencies>

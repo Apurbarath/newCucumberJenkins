@@ -1,6 +1,7 @@
 package stepDefinations;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import pages.SignIn_Page;
 
 public class Apurba extends InitBase{
 	
-	public Apurba() {
+	public Apurba() throws MalformedURLException {
 		super();
 		setChromePreference();
 		openBrowser("http://demo.guru99.com/test/yahoo.html");
@@ -30,8 +31,9 @@ public class Apurba extends InitBase{
 	}
 
 	@When("^apurba downloaded a file$")
-	public void apurbaDownloadedAFile(){
+	public void apurbaDownloadedAFile() throws InterruptedException{
 	driver.findElement(By.id("messenger-download")).click();
+	Thread.sleep(10000);
 	}
 	    
 

@@ -4,18 +4,29 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+import java.util.prefs.Preferences;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 public class InitBase {
 	
 	public static WebDriver driver;
 	public static Properties prop;
+	public DesiredCapabilities cap;
+	//public static String hubAddress = "http://192.168.29.91:5556/wd/hub";
 
 	public InitBase()
 	{
@@ -31,7 +42,7 @@ public class InitBase {
 		}
 	}
 	
-	public void setChromePreference() {
+	public void setChromePreference() throws MalformedURLException {
 		String currentDir = System.getProperty("user.dir");
 		String expected_dir = currentDir+"\\src\\test\\resources\\download";
 		String driver_path = currentDir+"\\src\\main\\resources\\Drivers\\chromedriver.exe";
@@ -48,11 +59,24 @@ public class InitBase {
 		chromePref.put("download.prompt_for_download", "true");
 		chromePref.put("profile.default_content_settings.popups", 0);
 		chromePref.put("safebrowsing.enabled", "false");
+		chromePref.put("browser.helperApps.neverAsk.saveToDisk", "application/vnd.exe");
+		chromePref.put("browser.setDownloadBehavior", "allow");
 		
 		options.setExperimentalOption("prefs", chromePref);
+		//options.addArguments("headless");
 	    System.setProperty("webdriver.chrome.driver", driver_path);
-	    driver = new ChromeDriver(options);
+	    
+	   driver = new ChromeDriver(options);
+	 
+		//cap = new DesiredCapabilities();
 		
+		//cap.setBrowserName("chrome");
+		//cap.setPlatform(Platform.WINDOWS);
+		//cap.setVersion("4");
+		//driver = new RemoteWebDriver(new URL("http://192.168.29.91:5556/wd/hub"),options );
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.get("http://demo.guru99.com/test/yahoo.html");
+	    
 	}
 	
 	public static void deleteAllFiles(File file) {
