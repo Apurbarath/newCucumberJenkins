@@ -11,7 +11,10 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features= {"src/test/resources/features"},
 		plugin = { "pretty", "html:target/cucumber-reports","json:target/cucumber-reports/Cucumber.json" },
-				glue = {"stepDefinations"})
+				glue = {"stepDefinations"},	
+				dryRun=false ,
+				monochrome=true,
+				tags = {"@apurba"})
 
 public class MyRunner  {
 

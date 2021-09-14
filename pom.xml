@@ -19,6 +19,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M5</version>
+				<configuration>
+  				<includes>
+					<exclude>**/*MyRunner.java</exclude>
+				</includes>
+  				</configuration>
 				
 				</plugin>
 				<plugin>
@@ -26,20 +31,7 @@
 					<artifactId>maven-source-plugin</artifactId>
 					<version>3.0.1</version>
 			</plugin>
-			<plugin>
-  				<groupId>org.apache.maven.plugins</groupId>
-  				<artifactId>maven-failsafe-plugin</artifactId>
-  				<version>3.0.0-M3</version>
-  				<configuration>
-  				<includes>
-					<include>**/*Runner.java</include>
-				</includes>
-  					<parallel>methods</parallel>
-  					<threadCount>3</threadCount>
-  					<perCoreThreadCount>true</perCoreThreadCount>
-  				</configuration>
-  				
-			</plugin>
+			
 			</plugins>
 		</build>
 		

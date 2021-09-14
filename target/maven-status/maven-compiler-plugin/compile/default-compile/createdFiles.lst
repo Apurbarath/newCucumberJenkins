@@ -1,0 +1,3 @@
+base\InitBase.class
+pages\SignIn_Page.class
+pages\Registration_Page.class
