@@ -10,9 +10,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing  Env is ..$Environment'
+                echo "Testing  Env is ..%Environment%"
                 bat """
-                mvn clean test -Denv=$Environment
+                mvn clean test -Denv=%Environment%
                 """
             }
         }
