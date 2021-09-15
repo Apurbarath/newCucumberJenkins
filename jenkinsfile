@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 bat """
-                mvn test
+                mvn clean test -Denv=${Environment}
                 """
             }
         }

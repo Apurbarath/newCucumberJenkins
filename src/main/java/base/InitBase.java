@@ -75,7 +75,15 @@ public class InitBase {
 		//cap.setVersion("4");
 		//driver = new RemoteWebDriver(new URL("http://192.168.29.91:5556/wd/hub"),options );
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if(System.getProperty("env").equals("DEV")) {
 		driver.get("http://demo.guru99.com/test/yahoo.html");
+		System.out.println("*******************************The current env is DEV******************");
+		System.out.println("****DEVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV********");
+		}
+		else if(System.getProperty("env").equals("ST")) {
+			driver.get("http://demo.guru99.com/test/yahoo.html");
+			System.out.println("The current env is ST");
+		}
 	    
 	}
 	
